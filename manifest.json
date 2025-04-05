@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "NotionGatekeeper",
+  "version": "1.0",
+  "description": "This hides Notion’s “Share to web” button.",
+  "permissions": [],
+  "content_scripts": [
+    {
+      "matches": ["https://www.notion.so/*"],
+      "js": ["content.js"]
+    }
+  ]
+}

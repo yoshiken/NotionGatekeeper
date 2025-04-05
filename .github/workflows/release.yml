@@ -1,0 +1,28 @@
+name: Release Extension as ZIP
+
+on:
+  push:
+    tags:
+      - 'v*'  # v1.0.0みたいなタグをpushしたときに発火
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: Create ZIP
+        run: |
+          zip -r chrome-extension.zip content.js manifest.json README.md License
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: chrome-extension.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
